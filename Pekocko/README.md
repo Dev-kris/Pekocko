@@ -1,9 +1,19 @@
-# HOT TAKES #
+# HOT TAKES
 
-## Installation ##
+The company So Pekocko tasked me with the creation of an api to connect their existing frontend to an existing backend.
+
+### Technologies Used
+
+Node.js
+Express
+MongoDB
+Mongoose
+
+## Installation
+
 Clone this repo, run `npm install`.
 
-## Usage ##
+## Usage
 
 Run `npm start`. This should both run the local server and launch your browser.
 
