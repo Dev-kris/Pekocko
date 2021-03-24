@@ -1,7 +1,23 @@
+//mongodb+srv://kris:<password>@cluster0.dvwjo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+//fHjuCoX7iYh0fxAu
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
+
+mongoose
+  .connect(
+    'mongodb+srv://kris:fHjuCoX7iYh0fxAu@cluster0.dvwjo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  )
+  .then(() => {
+    console.log('Successfully Connected to MongoDB Atlas.');
+  })
+  .catch((error) => {
+    console.log('Unable to connect to mongoDB Atlas.');
+    console.log(error);
+  });
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
