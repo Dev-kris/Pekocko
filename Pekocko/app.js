@@ -5,9 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-//problem here importing sauce model
-//const sauces = require('./models/sauces');
-const Sauces = require('./models/sauces');
+const Sauce = require('./models/sauces');
 
 const app = express();
 
