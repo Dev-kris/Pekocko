@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const Sauce = require('./models/sauces');
+const Sauce = require('./models/Sauce');
 
 const app = express();
 
@@ -54,20 +54,52 @@ app.post('/api/auth/login', (req, res, next) => {
   });
 });
 //sauces route, needs sauce array
-app.use('/api/sauces', (req, res, next) => {});
+app.use('/api/sauces', (req, res, next) => {
+  Sauce.find()
+    .then((sauces) => {
+      res.status(200).json(sauces);
+      console.log('all sauces listed');
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+});
+
+/* TEST DATA
+
+{
+  const sauce = new Sauce({
+    name: 'test',
+    manufacturer: 'teat mfg',
+    description: 'test desc',
+    imageUrl: 'test img',
+    mainPepper: 'test chili ',
+    heat: 4,
+    likes: 2,
+    dislikes: 3,
+    usersLiked: [],
+    usersDisliked: [],
+  });
+*/
 
 //sauces route, post new sauce
 //
-app.post('/api/sauce', (req, res, next) => {
-  const sauces = new Sauces({
+app.post('/api/sauces', (req, res, next) => {
+  const sauce = new Sauce({
     name: req.body.name,
     manufacturer: req.body.manufacturer,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     mainPepper: req.body.mainPepper,
     heat: req.body.heat,
+    likes: 0,
+    dislikes: 0,
+    usersLiked: [],
+    usersDisliked: [],
   });
-  sauces
+  sauce
     .save()
     .then(() => {
       res.status(201).json({
