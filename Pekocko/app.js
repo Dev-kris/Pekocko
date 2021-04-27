@@ -2,7 +2,7 @@
 //fHjuCoX7iYh0fxAu
 
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const Sauce = require('./models/Sauce');
@@ -33,8 +33,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+//express now includes their own parser
+//app.use(bodyParser.json());
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 //signup route, needs validation
 app.post('/api/auth/signup', (req, res, next) => {
@@ -67,27 +69,24 @@ app.get('/api/sauces', (req, res, next) => {
     });
 });
 
-/* TEST DATA Remove
-
-{
-  const sauce = new Sauce({
-    name: 'test',
-    manufacturer: 'teat mfg',
-    description: 'test desc',
-    imageUrl: 'test img',
-    mainPepper: 'test chili ',
-    heat: 4,
-    likes: 2,
-    dislikes: 3,
-    usersLiked: [],
-    usersDisliked: [],
-  });
-*/
+//get individual sauce
+app.get('/api/sauces/:id', (req, res, next) => {
+  Sauce.findOne({
+    _id: req.params.id,
+  })
+    .then((sauce) => {
+      res.status(200).json(sauce);
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+});
 
 //sauces route, post new sauce
 //
 app.post('/api/sauces', (req, res, next) => {
-  console.log('testing line');
   const sauce = new Sauce({
     name: req.body.name,
     manufacturer: req.body.manufacturer,
