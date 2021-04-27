@@ -54,7 +54,7 @@ app.post('/api/auth/login', (req, res, next) => {
   });
 });
 //sauces route, needs sauce array
-app.use('/api/sauces', (req, res, next) => {
+app.get('/api/sauces', (req, res, next) => {
   Sauce.find()
     .then((sauces) => {
       res.status(200).json(sauces);
@@ -67,7 +67,7 @@ app.use('/api/sauces', (req, res, next) => {
     });
 });
 
-/* TEST DATA
+/* TEST DATA Remove
 
 {
   const sauce = new Sauce({
@@ -87,6 +87,7 @@ app.use('/api/sauces', (req, res, next) => {
 //sauces route, post new sauce
 //
 app.post('/api/sauces', (req, res, next) => {
+  console.log('testing line');
   const sauce = new Sauce({
     name: req.body.name,
     manufacturer: req.body.manufacturer,
@@ -110,6 +111,7 @@ app.post('/api/sauces', (req, res, next) => {
       res.status(400).json({
         error: error,
       });
+      console.log(error);
     });
 });
 
