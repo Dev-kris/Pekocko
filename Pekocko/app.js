@@ -112,6 +112,21 @@ app.put('/api/sauces/:id', (req, res, next) => {
     });
 });
 
+//delete sauce recipe
+app.delete('/api/sauces/:id', (req, res, next) => {
+  Sauce.deleteOne({ _id: req.params.id })
+    .then(() => {
+      res.status(200).json({
+        message: 'Sauce deleted successfully',
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error: error,
+      });
+    });
+});
+
 //sauces route, post new sauce
 //
 app.post('/api/sauces', (req, res, next) => {
