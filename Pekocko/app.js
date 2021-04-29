@@ -39,24 +39,6 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-//signup route, needs validation
-app.post('/api/auth/signup', (req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: 'Signup Successful.',
-  });
-  // do i need next here or in params?
-  next();
-});
-
-//login route, needs authentication
-app.post('/api/auth/login', (req, res, next) => {
-  console.log(req.body);
-  res.status(201).json({
-    message: 'Login Successful.',
-  });
-});
-
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
