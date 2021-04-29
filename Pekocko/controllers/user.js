@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
 // signup
@@ -24,6 +24,7 @@ exports.signup = (req, res, next) => {
   });
 };
 
+//research why comparison works
 exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
@@ -40,8 +41,8 @@ exports.login = (req, res, next) => {
               error: new Error('Incorrect password'),
             });
           }
-          const token = jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
-            expiresIn: '24h',
+            const token = jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
+            expiresIn: '24h'
           });
           res.status(200).json({
             userId: user._id,

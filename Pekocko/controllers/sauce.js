@@ -1,6 +1,5 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
-const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 
 //Creates a new sauce recipe
 
@@ -8,6 +7,7 @@ exports.createSauce = (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
   req.body.sauce = JSON.parse(req.body.sauce);
   const sauce = new Sauce({
+    _id: req.params.id,
     name: req.body.sauce.name,
     manufacturer: req.body.sauce.manufacturer,
     description: req.body.sauce.description,
