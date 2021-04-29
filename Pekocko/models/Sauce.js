@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const sauceSchema = mongoose.Schema({
-  name: { type: String },
-  manufacturer: { type: String },
-  description: { type: String },
-  imageUrl: { type: String },
-  mainPepper: { type: String },
-  heat: { type: Number },
-  likes: { type: Number },
-  dislikes: { type: Number },
-  usersLiked: { type: [String] },
-  usersDisliked: { type: [String] },
+  name: { type: String, required: true, unique: true },
+  manufacturer: { type: String, required: true },
+  description: { type: String, required: true },
+  mainPepper: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  heat: { type: Number, required: true },
+  likes: { type: Number, required: true },
+  dislikes: { type: Number, required: true },
+  usersLiked: { type: Array, required: true },
+  usersDisliked: { type: Array, required: true },
 });
 
+sauceSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Sauce', sauceSchema);
