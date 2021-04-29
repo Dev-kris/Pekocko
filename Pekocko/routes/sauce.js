@@ -3,11 +3,10 @@ const router = express.Router();
 
 const sauceCtrl = require('../controllers/sauce');
 
-//sauces route, post new sauce
-//
+//sauces route, post a new sauce
 router.post('/', sauceCtrl.createSauce);
 
-//sauces route, needs sauce array
+//sauces route, gets all sauces
 router.get('/', sauceCtrl.getAllSauces);
 
 //get individual sauce

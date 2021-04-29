@@ -1,5 +1,7 @@
 const Sauce = require('../models/Sauce');
 
+//Creates a new sauce recipe
+
 exports.createSauce = (req, res, next) => {
   const sauce = new Sauce({
     name: req.body.name,
@@ -28,6 +30,7 @@ exports.createSauce = (req, res, next) => {
     });
 };
 
+//Gets all sauce recipes
 exports.getAllSauces = (req, res, next) => {
   Sauce.find()
     .then((sauces) => {
@@ -41,6 +44,7 @@ exports.getAllSauces = (req, res, next) => {
     });
 };
 
+//Gets a single sauce recipe
 exports.getOneSauce = (req, res, next) => {
   Sauce.findOne({
     _id: req.params.id,
@@ -55,6 +59,7 @@ exports.getOneSauce = (req, res, next) => {
     });
 };
 
+//Modifies a single sauce recipe
 exports.modifySauce = (req, res, next) => {
   const sauce = new Sauce({
     _id: req.params.id,
@@ -82,6 +87,7 @@ exports.modifySauce = (req, res, next) => {
     });
 };
 
+//Deletes a single sauce recipe
 exports.deleteSauce = (req, res, next) => {
   Sauce.deleteOne({ _id: req.params.id })
     .then(() => {
