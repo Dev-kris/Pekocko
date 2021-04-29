@@ -17,6 +17,7 @@
     "http-server": "^0.12.3",
     "live-server": "^1.2.1",
     "mongoose": "^5.12.2",
+    "mongoose-unique-validator": "^2.0.3",
     "run-script-os": "^1.0.7"
   }
 }
