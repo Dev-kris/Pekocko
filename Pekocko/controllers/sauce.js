@@ -1,4 +1,6 @@
 const Sauce = require('../models/Sauce');
+const fs = require('fs');
+const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 
 //Creates a new sauce recipe
 
@@ -95,7 +97,6 @@ exports.modifySauce = (req, res, next) => {
       usersDisliked: [],
     };
   }
-
   Sauce.updateOne({ _id: req.params.id }, sauce)
     .then(() => {
       res.status(201).json({
@@ -111,15 +112,20 @@ exports.modifySauce = (req, res, next) => {
 
 //Deletes a single sauce recipe
 exports.deleteSauce = (req, res, next) => {
-  Sauce.deleteOne({ _id: req.params.id })
-    .then(() => {
-      res.status(200).json({
-        message: 'Sauce deleted successfully',
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error,
-      });
+  Sauce.findOne({ _id: req.params._id }).then((sauce) => {
+    const filename = sauce.imageUrl.split('/images/')[1];
+    fs.unlink('images/' + filename, () => {
+      Sauce.deleteOne({ _id: req.params.id })
+        .then(() => {
+          res.status(200).json({
+            message: 'Sauce deleted successfully',
+          });
+        })
+        .catch((error) => {
+          res.status(400).json({
+            error: error,
+          });
+        });
     });
+  });
 };
