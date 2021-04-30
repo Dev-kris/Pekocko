@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const sauceSchema = mongoose.Schema({
-  
   name: { type: String, required: true, unique: true },
   manufacturer: { type: String, required: true },
   description: { type: String, required: true },
@@ -13,6 +12,7 @@ const sauceSchema = mongoose.Schema({
   dislikes: { type: Number, required: true },
   usersLiked: { type: Array, required: true },
   usersDisliked: { type: Array, required: true },
+  userId: { type: String, required: true },
 });
 
 sauceSchema.plugin(uniqueValidator);
