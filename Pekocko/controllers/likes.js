@@ -66,6 +66,6 @@ exports.likesSystem = (req, res, next) => {
       .then(() => {
         res.status(200).json({ message: 'Disliked' });
       })
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json({ error: error }));
   }
 };
