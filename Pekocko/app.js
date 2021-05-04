@@ -10,6 +10,7 @@ const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 const app = express();
+const helmet = require('helmet');
 
 mongoose
   .connect(
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
 });
 //express now includes their own parser
 app.use(bodyParser.json());
+app.use(helmet());
 
 //app.use(express.json());
 
