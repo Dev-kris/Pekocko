@@ -8,6 +8,7 @@ const path = require('path');
 
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 const helmet = require('helmet');
@@ -38,7 +39,8 @@ app.use((req, res, next) => {
 });
 //express now includes their own parser
 app.use(bodyParser.json());
-app.use(helmet());
+app.use(helmet()); //helps prevent XSS attacks (primarily through CSP)
+app.use(mongoSanitize()); //removes $ and . for db protection.
 
 //app.use(express.json());
 
