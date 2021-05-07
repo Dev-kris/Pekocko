@@ -66,21 +66,19 @@ exports.getOneSauce = (req, res, next) => {
 //Modifies a single sauce recipe
 exports.modifySauce = (req, res, next) => {
   let sauce = new Sauce({ _id: req.params._id });
-  if (req.file) {
+  if (req.file !== undefined && req.file !== null) {
     const url = req.protocol + '://' + req.get('host');
-    req.body.sauce = JSON.parse(req.body.sauce);
+    const params = JSON.parse(req.body.sauce);
+
     sauce = {
       _id: req.params.id,
-      name: req.body.sauce.name,
-      manufacturer: req.body.sauce.manufacturer,
-      description: req.body.sauce.description,
+      name: params.name,
+      manufacturer: params.manufacturer,
+      description: params.description,
       imageUrl: url + '/images/' + req.file.filename,
-      mainPepper: req.body.sauce.mainPepper,
-      heat: req.body.sauce.heat,
-      likes: 0,
-      dislikes: 0,
-      usersLiked: [],
-      usersDisliked: [],
+      mainPepper: params.mainPepper,
+      heat: params.heat,
+      userId: params.userId,
     };
   } else {
     sauce = {
@@ -88,13 +86,9 @@ exports.modifySauce = (req, res, next) => {
       name: req.body.name,
       manufacturer: req.body.manufacturer,
       description: req.body.description,
-      imageUrl: req.body.imageUrl,
       mainPepper: req.body.mainPepper,
       heat: req.body.heat,
-      likes: 0,
-      dislikes: 0,
-      usersLiked: [],
-      usersDisliked: [],
+      userId: req.body.userId,
     };
   }
   Sauce.updateOne({ _id: req.params.id }, sauce)
