@@ -1,9 +1,12 @@
 const Sauce = require('../models/Sauce');
 
+// system to display if users like or dislike a sauce
+// records userId and like/dislike
 exports.likesSystem = (req, res, next) => {
   const like = req.body.like;
   const userId = req.body.userId;
 
+  //removes users like/dislike and username if sauce is previously liked/disliked
   if (like === 0) {
     Sauce.findOne({
       _id: req.params.id,
