@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const sauceSchema = mongoose.Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true, unique: true, maxlength: 20 }, //front end is not setup to notify
   manufacturer: { type: String, required: true },
   description: { type: String, required: true },
   mainPepper: { type: String, required: true },
