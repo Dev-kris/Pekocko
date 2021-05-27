@@ -65,10 +65,10 @@ exports.getOneSauce = (req, res, next) => {
 
 //Modifies a single sauce recipe
 exports.modifySauce = (req, res, next) => {
-  let sauce = new Sauce({ _id: req.params._id });
   if (req.file !== undefined && req.file !== null) {
-    const url = req.protocol + '://' + req.get('host');
+    let sauce = new Sauce({ _id: req.params._id });
     const params = JSON.parse(req.body.sauce);
+    const url = req.protocol + '://' + req.get('host');
 
     sauce = {
       _id: req.params.id,
