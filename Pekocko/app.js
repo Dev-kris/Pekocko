@@ -41,7 +41,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(helmet()); //helps prevent XSS attacks (primarily through CSP)
 app.use(mongoSanitize()); //removes $ and . for db protection.
-
 //app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
