@@ -65,13 +65,11 @@ exports.getOneSauce = (req, res, next) => {
 
 //Modifies a single sauce recipe
 exports.modifySauce = (req, res, next) => {
+  let sauce = new Sauce({ _id: req.params._id });
   if (req.file !== undefined && req.file !== null) {
-    const params = JSON.parse(req.body.sauce);
     const url = req.protocol + '://' + req.get('host');
-    let sauce = new Sauce({ _id: req.params._id });
-    console.log('new file detected');
-    console.log(params);
-    console.log(req.file);
+    const params = JSON.parse(req.body.sauce);
+
     sauce = {
       _id: req.params.id,
       name: params.name,
@@ -83,8 +81,6 @@ exports.modifySauce = (req, res, next) => {
       userId: params.userId,
     };
   } else {
-    console.log('no new file detected');
-
     sauce = {
       _id: req.params.id,
       name: req.body.name,
